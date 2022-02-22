@@ -15,9 +15,7 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: Container(
-          width: 100,
-          height: 100,
-          color: Colors.red[100],
+          // color: Colors.red[100],
           child: Text("welcome to $days days flutter program"),
         ),
       ),
