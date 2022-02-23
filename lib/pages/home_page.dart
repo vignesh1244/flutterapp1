@@ -11,15 +11,12 @@ class HomePage extends StatelessWidget {
       // color: Colors.greenAccent,
       appBar: AppBar(
       backgroundColor: Colors.teal  ,
-        title: Text("this is title"),
+        title: const Text("this is title"),
       ),
       body: Center(
-        child: Container(
-          // color: Colors.red[100],
-          child: Text("welcome to $days days flutter program"),
-        ),
+        child: Text("welcome to $days days flutter program"),
       ),
-      drawer: Drawer(),
+      drawer: const Drawer(),
     );
   }
 }
