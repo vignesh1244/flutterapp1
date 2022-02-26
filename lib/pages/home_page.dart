@@ -1,4 +1,6 @@
+import 'package:feb22/models/catalog.dart';
 import 'package:feb22/widget/drawer.dart';
+import 'package:feb22/widget/item_wedgit.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,15 +11,17 @@ class HomePage extends StatelessWidget {
     int days = 10;
 
     return Scaffold(
-      // color: Colors.greenAccent,
       appBar: AppBar(
-      backgroundColor: Colors.teal  ,
-        title: const Text("this is title"),
+        title: Text("Catalog App"),
       ),
-      body: Center(
-        child: Text("welcome to $days days flutter program"),
-      ),
-      drawer:  MyDrawer(),
+      body: ListView.builder(
+          itemCount: CatalogModel.items.length,
+          itemBuilder: (context, index) {
+            return ItemWidget(
+              item: CatalogModel.items[index],
+            );
+          }),
+      drawer: MyDrawer(),
     );
   }
 }
