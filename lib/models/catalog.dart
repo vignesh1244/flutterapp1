@@ -1,5 +1,5 @@
 class CatalogModel {
-  static final items = [
+  static List<Item> items = [
     Item(
         id: "001",
         name: "iphone",
@@ -20,4 +20,23 @@ class Item {
   final String image;
 
   Item({ required this.id,  required this.name, required this.desc, required this.price, required this.color, required this.image});
+
+
+  factory Item.formMap(Map<String,dynamic>map)=> Item(
+      id:map["id"],
+      name:map["name"],
+      desc:map["desc"],
+      price:map["price"],
+      color:map["color"],
+      image:map["image"], 
+    );
+  toMap()=>{
+    "id":id,
+    "name":name,
+    "desc":desc,
+    "price":price,
+    "color":color,
+    "image":image,
+
+  };
 }
