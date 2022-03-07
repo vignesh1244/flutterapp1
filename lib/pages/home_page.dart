@@ -20,35 +20,48 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
-    var catalogJson = await rootBundle.loadString("assets/files/catalog.json");
+    await Future.delayed(Duration(seconds: 2));
+    final catalogJson =
+        await rootBundle.loadString("assets/files/catalog.json");
     var decodeData = jsonDecode(catalogJson);
     var productData = decodeData["products"];
     CatalogModel.items =
         List.from(productData).map<Item>((item) => Item.formMap(item)).toList();
-        setState(() {
-          
-        });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: Colors.amber[200],
       appBar: AppBar(
         title: Text("Catalog App"),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: ListView.builder(
-          itemCount: CatalogModel.items.length,
-          itemBuilder: (context, index) {
-            return ItemWidget(
-              item: CatalogModel.items[index],
-            );
-          },
-        ),
-      ),
+          padding: EdgeInsets.all(16.0),
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 16,
+            ),
+            itemBuilder: (context, index) {
+              final item = CatalogModel.items[index];
+              return Card(
+                clipBehavior: Clip.antiAlias,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                child: GridTile(
+                  header: Text(item.name),
+                  child: Image.network(item.image),
+                  footer: Text(
+                    item.price.toString(),
+                  ),
+                ),
+              );
+            },
+            itemCount: CatalogModel.items.length,
+          )),
       drawer: MyDrawer(),
     );
   }
